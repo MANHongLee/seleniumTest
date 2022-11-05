@@ -84,5 +84,8 @@ def get_md5(file):
     return md5code
 
 
+driver = webdriver.Chrome()
+driver.execute_script()
+
 if __name__ == '__main__':
     print(get_md5(fileURl))
