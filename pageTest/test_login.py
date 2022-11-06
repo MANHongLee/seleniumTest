@@ -16,11 +16,13 @@ class TestLogin(unittest.TestCase):
     """
     def setUp(self):
         test_url = 'http://192.168.0.68:9002/#/login'
-
-        self.driver = webdriver.Chrome()
-        self.driver.get(test_url)
-        # time.sleep(3)
+        # 设置浏览器无界面启动
+        self.chromeOption = webdriver.ChromeOptions()
+        self.chromeOption.add_argument('--headless')
+        self.driver = webdriver.Chrome(options=self.chromeOption)
         self.driver.implicitly_wait(30)
+        # 打开浏览器
+        self.driver.get(test_url)
 
     """
     测试结束后所做的操作
@@ -55,21 +57,17 @@ class TestLogin(unittest.TestCase):
 
         # 判断是否登陆成功
         if status == 0:
-            # 用户名或密码不正确。
+            # 用户名或密码不正确
             self.assertIn('用户名或密码不正确。', self.driver.page_source)
         if status == 1:
             # 成功登陆
             self.name = self.driver.find_element(By.XPATH, "//div[contains(@class, 'tool-popover')]/div[@class='name']")
             print(self.name.text)
             self.assertEqual(self.name.text, "LiMinKang")
-
+            
 
 if __name__ == '__main__':
     unittest.main()
-    # file_name = 'report_{}'.format(time.strftime('%Y%m%d%H%M%S', time.localtime(time.time())))
-    # test_report_url = '/Users/liminkang/Desktop' + 'os.'
-    # testSuite = unittest.TestLoader.discover('.')
-    # runner = HTMLTestRunner.HTMLTestRunner(stream=f, title="")
 
 
 

@@ -11,6 +11,7 @@ if __name__ == '__main__':
     report_url = '/Users/liminkang/Desktop' + os.sep + report_name
     # 查找当前目录下符合的测试用例，构建测试集合
     suite = unittest.defaultTestLoader.discover('.')
+
     # 通过class构建测试集合（class下面的所有测试用例都会被执行）
     # test_cases = unittest.TestLoader().loadTestsFromTestCase(test_login.TestLogin)
     # suite = unittest.TestSuite([test_cases])
